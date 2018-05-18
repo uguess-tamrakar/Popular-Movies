@@ -1,48 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context=".MainFragment">
 
     <ImageButton
-        android:id="@+id/imageButtonMovieDetails"
+        android:id="@+id/ib_movie_details"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:layout_height="@dimen/frag_ib_height"
+        android:layout_marginBottom="@dimen/frag_margin_bottom"
+        android:layout_marginEnd="@dimen/frag_margin_end"
+        android:layout_marginLeft="@dimen/frag_margin_left"
+        android:layout_marginRight="@dimen/frag_margin_right"
+        android:layout_marginStart="@dimen/frag_margin_start"
+        android:layout_marginTop="@dimen/frag_margin_top"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/cd_movie_details"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        app:srcCompat="@drawable/ic_movie_info_24px"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textSize="@dimen/frag_ib_text_size"
+        app:srcCompat="@drawable/ic_movie_info_24px" />
 
     <ImageView
-        android:id="@+id/imageViewMoviePoster"
+        android:id="@+id/iv_movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="524dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/frag_margin_bottom"
+        android:layout_marginEnd="@dimen/frag_margin_end"
+        android:layout_marginLeft="@dimen/frag_margin_left"
+        android:layout_marginRight="@dimen/frag_margin_right"
+        android:layout_marginStart="@dimen/frag_margin_start"
+        android:layout_weight="0.8"
+        android:background="@color/colorPrimary"
         android:contentDescription="@string/cd_movie_poster"
         app:srcCompat="@drawable/ic_movie_info_24px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonMovieDetails" />
+        android:ems="10" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_movie_title"
+        android:text="Movie Title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/frag_tv_height"
+        android:layout_marginBottom="@dimen/frag_margin_bottom"
+        android:layout_marginEnd="@dimen/frag_margin_end"
+        android:layout_marginLeft="@dimen/frag_margin_left"
+        android:layout_marginRight="@dimen/frag_margin_right"
+        android:layout_marginStart="@dimen/frag_margin_start"
+        android:background="@color/colorPrimary"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:contentDescription="@string/cd_movie_poster"/>
+
+</LinearLayout>
