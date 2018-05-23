@@ -1,9 +1,9 @@
-package com.tamrakar.uguess.popularmovies.utils;
+package com.tamrakar.uguess.popularmovies.helpers;
 
-public class UriUtils {
+public class UriHelper {
 
     private static final String MOVIE_DB_BASE_URL = "http://api.themoviedb.org/3";
-    private static final String TMDB_IMAGE_BASE_URI = "http://image.tmdb.org/t/p/w185/";
+    private static final String TMDB_IMAGE_BASE_URI = "http://image.tmdb.org/t/p/w185";
     private static final String POPULAR_ENDPOINT = "/movie/popular";
     private static final String TOP_RATED_ENDPOINT = "/move/top_rated";
     private static final String API_KEY_PARAM = "?api_key";

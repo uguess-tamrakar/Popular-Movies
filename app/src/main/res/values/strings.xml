@@ -4,5 +4,17 @@
     <!--Content Descriptions-->
     <string name="cd_movie_details">Movie Details</string>
     <string name="cd_movie_poster">Movie Poster</string>
+    <string name="movies_by_popularity">Movies by Popularity</string>
+    <string name="movies_by_top_rated">Movies by Top-rated</string>
+
+    <!--Settings Related-->
+    <string name="title_pref">Preferences</string>
+    <string name="title_pref_sort_order">Sort Order</string>
+    <string name="default_pref_sort_order">0</string>
+    <string name="diag_title_pref_sort_order">Select a sort order:</string>
+    <string name="key_pref_sort_order" translatable="false">sort_order</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="sort_order_entries">
+        <item>Popularity</item>
+        <item>Top-rated</item>
+    </string-array>
+
+    <string-array name="sort_order_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+</resources>

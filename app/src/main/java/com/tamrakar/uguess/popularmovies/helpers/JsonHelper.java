@@ -1,6 +1,5 @@
-package com.tamrakar.uguess.popularmovies.utils;
+package com.tamrakar.uguess.popularmovies.helpers;
 
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 import com.tamrakar.uguess.popularmovies.model.Movie;
@@ -11,11 +10,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class JsonUtils {
+public class JsonHelper {
 
-    private static String LOG_TAG = JsonUtils.class.getName();
+    private static String LOG_TAG = JsonHelper.class.getName();
 
-    public static ArrayList<Movie> parseMoviesJson(String json) {
+    public ArrayList<Movie> parseMoviesJson(String json) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         try {
