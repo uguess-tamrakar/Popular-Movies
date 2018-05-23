@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
             try {
                 UriHelper uriHelper = new UriHelper();
-                URL urlPopularMovies = new URL(uriHelper.getPopularMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716"));
+                URL urlPopularMovies = new URL(uriHelper.getPopularMoviesUriString("API KEY HERE"));
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) urlPopularMovies.openConnection();
 
