@@ -12,7 +12,9 @@ import android.support.v7.preference.PreferenceManager;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PreferencesFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class PreferencesFragment
+        extends PreferenceFragmentCompat
+        implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String LOG_TAG = PreferencesFragment.class.getSimpleName();
 

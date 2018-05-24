@@ -3,9 +3,9 @@ package com.tamrakar.uguess.popularmovies.helpers;
 public class UriHelper {
 
     private static final String MOVIE_DB_BASE_URL = "http://api.themoviedb.org/3";
-    private static final String TMDB_IMAGE_BASE_URI = "http://image.tmdb.org/t/p/w185";
+    private static final String TMDB_IMAGE_BASE_URI = "http://image.tmdb.org/t/p/";
     private static final String POPULAR_ENDPOINT = "/movie/popular";
-    private static final String TOP_RATED_ENDPOINT = "/move/top_rated";
+    private static final String TOP_RATED_ENDPOINT = "/movie/top_rated";
     private static final String API_KEY_PARAM = "?api_key";
 
     public String getPopularMoviesUriString(String apiKey) throws Exception {
@@ -28,10 +28,20 @@ public class UriHelper {
         }
     }
 
-    public String getTmdbImageUriString(String posterPath) throws Exception {
+    public String getTmdbMoviePosterUriString(String posterPath) throws Exception {
         if (!posterPath.isEmpty()) {
             StringBuilder result = new StringBuilder();
-            result.append(TMDB_IMAGE_BASE_URI).append(posterPath);
+            result.append(TMDB_IMAGE_BASE_URI).append("w185").append(posterPath);
+            return result.toString();
+        } else {
+            throw new Exception("Api key is required.");
+        }
+    }
+
+    public String getTmdbMovieBackdropUriString(String posterPath) throws Exception {
+        if (!posterPath.isEmpty()) {
+            StringBuilder result = new StringBuilder();
+            result.append(TMDB_IMAGE_BASE_URI).append("w342").append(posterPath);
             return result.toString();
         } else {
             throw new Exception("Api key is required.");

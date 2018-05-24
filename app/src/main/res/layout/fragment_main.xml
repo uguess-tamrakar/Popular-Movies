@@ -18,6 +18,7 @@
         android:layout_marginBottom="@dimen/frag_margin_bottom"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:clickable="true"
         android:contentDescription="@string/cd_movie_poster" />
 

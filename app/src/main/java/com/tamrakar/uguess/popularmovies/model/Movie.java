@@ -5,8 +5,10 @@ import android.os.Parcelable;
 
 public class Movie implements Parcelable {
 
-    private String originalTitle;
+    private String title;
     private String posterImagePath;
+    private String backdropPath;
+    private String originalTitle;
     private String overview;
     private String userRating;
     private String releaseDate;
@@ -17,16 +19,18 @@ public class Movie implements Parcelable {
     public Movie() {
     }
 
-    public Movie(String originalTitle, String posterImagePath, String overview, String userRating, String releaseDate) {
-        this.originalTitle = originalTitle;
+    public Movie(String title, String posterImagePath, String backdropPath, String originalTitle, String overview, String userRating, String releaseDate) {
+        this.title = title;
         this.posterImagePath = posterImagePath;
+        this.backdropPath = backdropPath;
+        this.originalTitle = originalTitle;
         this.overview = overview;
         this.userRating = userRating;
         this.releaseDate = releaseDate;
     }
 
     public Movie(Parcel parcel) {
-        originalTitle = parcel.readString();
+        title = parcel.readString();
         posterImagePath = parcel.readString();
         overview = parcel.readString();
         userRating = parcel.readString();
@@ -45,12 +49,12 @@ public class Movie implements Parcelable {
         }
     };
 
-    public String getOriginalTitle() {
-        return originalTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+    public void setTitle(String originalTitle) {
+        this.title = originalTitle;
     }
 
     public String getPosterImagePath() {
@@ -59,6 +63,14 @@ public class Movie implements Parcelable {
 
     public void setPosterImagePath(String posterImagePath) {
         this.posterImagePath = posterImagePath;
+    }
+
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
     public String getOverview() {
@@ -92,7 +104,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(originalTitle);
+        dest.writeString(title);
         dest.writeString(posterImagePath);
         dest.writeString(overview);
         dest.writeString(userRating);

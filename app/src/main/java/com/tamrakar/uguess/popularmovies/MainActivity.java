@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tamrakar.uguess.popularmovies.helpers.JsonHelper;
+import com.tamrakar.uguess.popularmovies.helpers.NetworkHelper;
 import com.tamrakar.uguess.popularmovies.helpers.UriHelper;
 import com.tamrakar.uguess.popularmovies.model.Movie;
 
@@ -23,21 +25,71 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String KEY_PREF_SORT_ORDER = "sort_order";
+    private static int sortOrder = 0;
     private SharedPreferences sharedPreferences;
+    private static ArrayList<Movie> moviesByPopularity;
+    private static ArrayList<Movie> moviesByTopRated;
 
     //<editor-fold desc="Overridden Methods">
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        boolean needToRetrieveMovies = false;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Get the list of movies in asynchronous task
-        new RetrieveMoviesAsyncTask().execute();
+        if (savedInstanceState != null) {
+            if (sortOrder == 0) {
+                if (moviesByPopularity == null || moviesByPopularity.isEmpty()) {
+                    moviesByPopularity = savedInstanceState.getParcelableArrayList("movies_by_popularity");
+
+                    if (moviesByPopularity == null) {
+                        needToRetrieveMovies = true;
+                    } else {
+                        constructMoviesGridView(moviesByPopularity);
+                    }
+                }
+            } else if (sortOrder == 1) {
+                if (moviesByTopRated == null || moviesByTopRated.isEmpty()) {
+                    moviesByTopRated = savedInstanceState.getParcelableArrayList("movies_by_top_rated");
+
+                    if (moviesByTopRated == null) {
+                        needToRetrieveMovies = true;
+                    } else {
+                        constructMoviesGridView(moviesByTopRated);
+                    }
+                }
+            }
+
+        } else {
+            if (sortOrder == 0) {
+                if (moviesByPopularity == null || moviesByPopularity.isEmpty()) {
+                    needToRetrieveMovies = true;
+                } else {
+                    constructMoviesGridView(moviesByPopularity);
+                }
+            } else if (sortOrder == 1) {
+                if (moviesByTopRated == null || moviesByTopRated.isEmpty()) {
+                    needToRetrieveMovies = true;
+                } else {
+                    constructMoviesGridView(moviesByTopRated);
+                }
+            }
+        }
+
+        if (needToRetrieveMovies) {
+
+            if (NetworkHelper.isConnectedToInternet(this)) {
+                //Get the list of movies in asynchronous task
+                new RetrieveMoviesAsyncTask().execute();
+            } else {
+                Toast.makeText(this, "Not connected to internet.", Toast.LENGTH_LONG).show();
+            }
+        }
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
@@ -66,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key == getResources().getString(R.string.key_pref_sort_order)) {
+        if (key.equals(getResources().getString(R.string.key_pref_sort_order))) {
             setMainTitle();
         }
     }
@@ -77,18 +129,29 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("movies_by_popularity", moviesByPopularity);
+        outState.putParcelableArrayList("movies_by_top_rated", moviesByTopRated);
+        super.onSaveInstanceState(outState);
+    }
+
     //</editor-fold>
 
-    private void constructMoviesGridView(List<Movie> movies) {
-        GridView gvMain = findViewById(R.id.gv_main);
-        MoviesAdapter moviesAdapter = new MoviesAdapter(this, movies);
-        gvMain.setAdapter(moviesAdapter);
+    private void constructMoviesGridView(ArrayList<Movie> movies) {
+        if (movies != null && !movies.isEmpty()) {
+            GridView gvMain = findViewById(R.id.gv_main);
+            MoviesAdapter moviesAdapter = new MoviesAdapter(this, movies);
+            gvMain.setAdapter(moviesAdapter);
+        } else {
+            Toast.makeText(this, "Movies list is empty. Check your internet connection.", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void setMainTitle() {
         TextView tvMain = findViewById(R.id.tv_main_title);
 
-        int sortOrder = Integer.valueOf(sharedPreferences.getString(KEY_PREF_SORT_ORDER, ""));
+        sortOrder = Integer.valueOf(sharedPreferences.getString(KEY_PREF_SORT_ORDER, ""));
 
         if (sortOrder == 0) {
             tvMain.setText(R.string.movies_by_popularity);
@@ -97,19 +160,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
     }
 
-    private class RetrieveMoviesAsyncTask extends AsyncTask<Void, Void, List<Movie>> {
+    private class RetrieveMoviesAsyncTask extends AsyncTask<Void, Void, ArrayList<Movie>> {
 
         private final String LOG_TAG = RetrieveMoviesAsyncTask.class.getSimpleName();
 
         @Override
-        protected List<Movie> doInBackground(Void... voids) {
-            List<Movie> movies = new ArrayList<>();
+        protected ArrayList<Movie> doInBackground(Void... voids) {
+            ArrayList<Movie> movies = new ArrayList<>();
 
             try {
                 UriHelper uriHelper = new UriHelper();
-                URL urlPopularMovies = new URL(uriHelper.getPopularMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716"));
+                String uriString = (sortOrder == 0) ?
+                        uriHelper.getPopularMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716") :
+                        uriHelper.getTopRatedMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716");
+                URL url = new URL(uriString);
 
-                HttpURLConnection httpURLConnection = (HttpURLConnection) urlPopularMovies.openConnection();
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
                 try {
                     //Read the input stream into buffer
@@ -124,10 +190,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
                     bufferedReader.close();
 
-                    if (null != responseBuilder.toString()) {
-                        JsonHelper jsonHelper = new JsonHelper();
-                        movies = jsonHelper.parseMoviesJson(responseBuilder.toString());
-                    }
+                    JsonHelper jsonHelper = new JsonHelper();
+                    movies = jsonHelper.parseMoviesJson(responseBuilder.toString());
                 } finally {
                     httpURLConnection.disconnect();
                 }
@@ -142,8 +206,15 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }
 
         @Override
-        protected void onPostExecute(List<Movie> movies) {
+        protected void onPostExecute(ArrayList<Movie> movies) {
             super.onPostExecute(movies);
+
+            if (sortOrder == 0) {
+                moviesByPopularity = movies;
+            } else {
+                moviesByTopRated = movies;
+            }
+
             constructMoviesGridView(movies);
         }
     }

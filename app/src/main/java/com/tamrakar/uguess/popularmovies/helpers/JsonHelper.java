@@ -28,13 +28,15 @@ public class JsonHelper {
                     JSONObject resultJsonObj = resultsArray.getJSONObject(i);
 
                     if (resultJsonObj != null) {
-                        String originalTitle = resultJsonObj.optString("original_title");
+                        String title = resultJsonObj.optString("title");
                         String posterPath = resultJsonObj.optString("poster_path");
+                        String backdropPath = resultJsonObj.optString("backdrop_path");
+                        String originalTitle = resultJsonObj.optString("original_title");
                         String overview = resultJsonObj.optString("overview");
                         String userRating = resultJsonObj.optString("vote_average");
                         String releaseDate = resultJsonObj.optString("release_date");
 
-                        movies.add(new Movie(originalTitle, posterPath, overview, userRating, releaseDate));
+                        movies.add(new Movie(title, posterPath, backdropPath, originalTitle, overview, userRating, releaseDate));
                     }
                 }
             }

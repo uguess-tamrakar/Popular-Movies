@@ -31,7 +31,7 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //Get the movie at this position
-        Movie movie = getItem(position);
+        final Movie movie = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_main, parent, false);
@@ -40,14 +40,22 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
             ivMoviePoster.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mContext.startActivity(new Intent(getContext(), DetailActivity.class));
+                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("title", movie.getTitle());
+                    intent.putExtra("original_title", movie.getOriginalTitle());
+                    intent.putExtra("backdrop_path", movie.getBackdropPath());
+                    intent.putExtra("overview", movie.getOverview());
+                    intent.putExtra("user_rating", movie.getUserRating());
+                    intent.putExtra("release_date", movie.getReleaseDate());
+                    mContext.startActivity(intent);
                 }
             });
 
             try {
-                String moviePosterUri = new UriHelper().getTmdbImageUriString(movie.getPosterImagePath());
+                String moviePosterUri = new UriHelper().getTmdbMoviePosterUriString(movie.getPosterImagePath());
                 Picasso.with(getContext())
                         .load(moviePosterUri)
+                        .placeholder(R.drawable.ic_movie_info_24px)
                         .into(ivMoviePoster);
             } catch (Exception e) {
                 Log.e(LOG_TAG, e.getMessage());

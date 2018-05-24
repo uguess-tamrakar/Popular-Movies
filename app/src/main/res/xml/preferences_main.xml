@@ -8,7 +8,6 @@
         android:dialogTitle="@string/diag_title_pref_sort_order"
         android:entries="@array/sort_order_entries"
         android:entryValues="@array/sort_order_values"
-        android:dialogLayout="@style/Preference.DialogPreference.Material"
         android:key="@string/key_pref_sort_order"/>
 
 </PreferenceScreen>
