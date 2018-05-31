@@ -28,6 +28,7 @@ public class JsonHelper {
                     JSONObject resultJsonObj = resultsArray.getJSONObject(i);
 
                     if (resultJsonObj != null) {
+                        int movieId = resultJsonObj.getInt("id");
                         String title = resultJsonObj.optString("title");
                         String posterPath = resultJsonObj.optString("poster_path");
                         String backdropPath = resultJsonObj.optString("backdrop_path");
@@ -36,7 +37,7 @@ public class JsonHelper {
                         String userRating = resultJsonObj.optString("vote_average");
                         String releaseDate = resultJsonObj.optString("release_date");
 
-                        movies.add(new Movie(title, posterPath, backdropPath, originalTitle, overview, userRating, releaseDate));
+                        movies.add(new Movie(movieId, title, posterPath, backdropPath, originalTitle, overview, userRating, releaseDate));
                     }
                 }
             }
