@@ -17,5 +17,10 @@
     <dimen name="frag_margin_start">1dp</dimen>
     <dimen name="frag_margin_top">1dp</dimen>
     <dimen name="frag_tv_height">30dp</dimen>
+    <dimen name="title_main_text_size">16sp</dimen>
+
+    <!--ativity detail footer-->
+    <dimen name="activity_detail_footer_component_margin">8dp</dimen>
+    <dimen name="activity_detail_footer_text_view_margin">16dp</dimen>
 
 </resources>

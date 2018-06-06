@@ -1,11 +1,11 @@
-package com.tamrakar.uguess.popularmovies.model;
+package com.tamrakar.uguess.popularmovies.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Movie implements Parcelable {
 
-    //region Member Variables...
+    //region Variables...
 
     private int mMovieId;
     private String mTitle;
@@ -16,11 +16,10 @@ public class Movie implements Parcelable {
     private String mUserRating;
     private String mReleaseDate;
 
-    //endregion Member Variables...
+    //endregion
 
-    /**
-     * No args constructor for use in serialization
-     */
+    //region Constructors...
+
     public Movie() {
     }
 
@@ -36,8 +35,11 @@ public class Movie implements Parcelable {
     }
 
     public Movie(Parcel parcel) {
+        mMovieId = parcel.readInt();
         mTitle = parcel.readString();
         mPosterImagePath = parcel.readString();
+        mBackdropPath = parcel.readString();
+        mOriginalTitle = parcel.readString();
         mOverview = parcel.readString();
         mUserRating = parcel.readString();
         mReleaseDate = parcel.readString();
@@ -54,6 +56,10 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+    //endregion Constructors...
+
+    //region Getters...
 
     public String getTitle() {
         return mTitle;
@@ -83,6 +89,13 @@ public class Movie implements Parcelable {
         return mReleaseDate;
     }
 
+    public int getMovieId() {
+        return mMovieId;
+    }
+
+    //endregion Getters...
+
+    //region Overridden Methods...
     @Override
     public int describeContents() {
         return 0;
@@ -90,10 +103,15 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mMovieId);
         dest.writeString(mTitle);
         dest.writeString(mPosterImagePath);
+        dest.writeString(mBackdropPath);
+        dest.writeString(mOriginalTitle);
         dest.writeString(mOverview);
         dest.writeString(mUserRating);
         dest.writeString(mReleaseDate);
     }
+    //endregion
+
 }

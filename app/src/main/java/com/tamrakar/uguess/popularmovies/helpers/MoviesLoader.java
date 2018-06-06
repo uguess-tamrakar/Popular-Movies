@@ -4,7 +4,8 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.tamrakar.uguess.popularmovies.model.Movie;
+import com.tamrakar.uguess.popularmovies.BuildConfig;
+import com.tamrakar.uguess.popularmovies.models.Movie;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -12,12 +13,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MoviesLoader extends AsyncTaskLoader<ArrayList<Movie>> {
 
-    public static final int MOVIES_LOADER_ID = 25;
     private static final String LOG_TAG = MoviesLoader.class.getSimpleName();
+    public static final int MOVIES_LOADER_ID = 25;
 
     private int mSortOrder;
     private ArrayList<Movie> mData;
@@ -33,9 +33,10 @@ public class MoviesLoader extends AsyncTaskLoader<ArrayList<Movie>> {
 
         try {
             UriHelper uriHelper = new UriHelper();
+            String apiKey = BuildConfig.THE_MOVIE_DB_API;
             String uriString = (mSortOrder == 0) ?
-                    uriHelper.getPopularMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716") :
-                    uriHelper.getTopRatedMoviesUriString("77ea09a490e5a4a8bed60fbc1bf1c716");
+                    uriHelper.getPopularMoviesUriString(apiKey) :
+                    uriHelper.getTopRatedMoviesUriString(apiKey);
             URL url = new URL(uriString);
 
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();

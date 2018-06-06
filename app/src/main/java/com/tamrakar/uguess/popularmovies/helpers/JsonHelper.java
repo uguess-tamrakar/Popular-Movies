@@ -2,7 +2,7 @@ package com.tamrakar.uguess.popularmovies.helpers;
 
 import android.util.Log;
 
-import com.tamrakar.uguess.popularmovies.model.Movie;
+import com.tamrakar.uguess.popularmovies.models.Movie;
 
 import org.json.JSONArray;
 import org.json.JSONException;
