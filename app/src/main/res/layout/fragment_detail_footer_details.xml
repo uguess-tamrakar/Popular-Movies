@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_original_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginStart="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:maxLines="2"
+            android:textColor="@color/colorHighlight"
+            android:textSize="@dimen/title_movie_detail_text_size" />
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:background="@color/colorAccent" />
+
+        <!--Movie Trailers RecyclerView-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_movie_trailers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal" />
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginRight="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginStart="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:textColor="@color/colorBackground"
+            android:textSize="@dimen/movie_detail_text_size" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_released_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginStart="@dimen/activity_detail_footer_component_margin"
+            android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+            android:textSize="@dimen/movie_detail_text_size" />
+
+    </LinearLayout>
+</layout>

@@ -6,6 +6,8 @@ ext {
     junitLibVersion = '4.12'
     picassoLibVersion = '2.5.2'
     roomLibVersion = "1.1.0"
+    lifecycleLibVersion = "1.1.0"
+    retrofitLibVersion = "2.3.0"
 }
 
 android {
@@ -48,6 +50,14 @@ dependencies {
     // Entity (table within database) and DAO (methods to access database)
     implementation "android.arch.persistence.room:runtime:${roomLibVersion}"
     annotationProcessor "android.arch.persistence.room:compiler:${roomLibVersion}"
+
+    // Live Data and ViewModel
+    implementation "android.arch.lifecycle:extensions:${lifecycleLibVersion}"
+    annotationProcessor "android.arch.lifecycle:compiler:${lifecycleLibVersion}"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${retrofitLibVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitLibVersion}"
 }
 
 repositories {

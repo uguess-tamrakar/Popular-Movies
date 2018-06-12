@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.tamrakar.uguess.popularmovies.models.Movie;
 
-@Database(entities = {FavMovieEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {Movie.class}, version = 1, exportSchema = false)
 public abstract class PopularMoviesDatabase extends RoomDatabase {
 
     private static final String LOG_TAG = PopularMoviesDatabase.class.getSimpleName();

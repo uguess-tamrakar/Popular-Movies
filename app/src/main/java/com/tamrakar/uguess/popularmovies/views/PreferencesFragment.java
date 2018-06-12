@@ -1,4 +1,4 @@
-package com.tamrakar.uguess.popularmovies;
+package com.tamrakar.uguess.popularmovies.views;
 
 
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
+
+import com.tamrakar.uguess.popularmovies.R;
 
 /**
  * A simple {@link Fragment} subclass.

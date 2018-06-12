@@ -4,8 +4,9 @@
 
     <item android:id="@+id/share_movie_trailer"
         android:title="@string/share_movie_trailer"
-        android:icon="@drawable/ic_movie_info_24px"
+        android:icon="@drawable/ic_movie_trailer_share_24px"
         app:showAsAction="ifRoom"
-        app:actionProviderClass="android.widget.ShareActionProvider" />
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:icon="@drawable/ic_movie_trailer_share_24px"/>
 
 </menu>

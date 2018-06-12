@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_movie_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
+        android:layout_marginRight="@dimen/activity_detail_footer_text_view_margin"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tv_movie_review_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textSize="@dimen/movie_review_author_text_size"
+        android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
+        android:layout_marginRight="@dimen/activity_detail_footer_text_view_margin"
+        android:textColor="@color/colorHighlight"
+        android:textAlignment="viewEnd" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/activity_detail_footer_component_margin"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+        android:background="@color/colorAccent" />
+
+</LinearLayout>

@@ -9,8 +9,10 @@
     <!--Labels-->
     <string name="movies_by_popularity">Movies by Popularity</string>
     <string name="movies_by_top_rated">Movies by Top-rated</string>
+    <string name="my_favorites">My Favorites</string>
     <string name="original_title">Original Title:</string>
     <string name="released_on">Released On:</string>
+    <string name="share_movie_trailer">Share movie trailer</string>
 
     <!--Settings Related-->
     <string name="title_pref">Preferences</string>
@@ -19,6 +21,10 @@
     <string name="diag_title_pref_sort_order">Select a sort order:</string>
     <string name="key_pref_sort_order" translatable="false">sort_order</string>
 
-    <string name="share_movie_trailer">Share movie trailer</string>
+    <!--Tab header names-->
+    <string name="tab_item_browse_text">Browse</string>
+    <string name="tab_item_favorites_text">Favorites</string>
+    <string name="tab_item_details_text">Details</string>
+    <string name="tab_item_reviews_text">Reviews</string>
 
 </resources>

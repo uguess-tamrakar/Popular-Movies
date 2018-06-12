@@ -1,9 +1,11 @@
-package com.tamrakar.uguess.popularmovies;
+package com.tamrakar.uguess.popularmovies.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import com.tamrakar.uguess.popularmovies.R;
 
 public class PreferencesActivity extends AppCompatActivity {
 

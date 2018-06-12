@@ -1,48 +1,86 @@
 package com.tamrakar.uguess.popularmovies.models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
+@Entity(tableName = "fav_movies")
 public class Movie implements Parcelable {
 
     //region Variables...
+    @PrimaryKey
+    private int movieId;
 
-    private int mMovieId;
-    private String mTitle;
-    private String mPosterImagePath;
-    private String mBackdropPath;
-    private String mOriginalTitle;
-    private String mOverview;
-    private String mUserRating;
-    private String mReleaseDate;
+    @ColumnInfo(name = "title")
+    private String title;
 
+    @ColumnInfo(name = "posterImagePath")
+    private String posterImagePath;
+
+    @ColumnInfo(name = "backdropPath")
+    private String backdropPath;
+
+    @ColumnInfo(name = "originalTitle")
+    private String originalTitle;
+
+    @ColumnInfo(name = "overview")
+    private String overview;
+
+    @ColumnInfo(name = "userRating")
+    private String userRating;
+
+    @ColumnInfo(name = "releasedDate")
+    public String releaseDate;
+
+    @Ignore
+    public List<MovieTrailer> movieTrailers;
     //endregion
 
     //region Constructors...
 
+    @Ignore
     public Movie() {
     }
 
     public Movie(int movieId, String title, String posterImagePath, String backdropPath, String originalTitle, String overview, String userRating, String releaseDate) {
-        this.mMovieId = movieId;
-        this.mTitle = title;
-        this.mPosterImagePath = posterImagePath;
-        this.mBackdropPath = backdropPath;
-        this.mOriginalTitle = originalTitle;
-        this.mOverview = overview;
-        this.mUserRating = userRating;
-        this.mReleaseDate = releaseDate;
+        this.movieId = movieId;
+        this.title = title;
+        this.posterImagePath = posterImagePath;
+        this.backdropPath = backdropPath;
+        this.originalTitle = originalTitle;
+        this.overview = overview;
+        this.userRating = userRating;
+        this.releaseDate = releaseDate;
     }
 
+    @Ignore
+    public Movie(int movieId, String title, String posterImagePath, String backdropPath, String originalTitle, String overview, String userRating, String releaseDate, List<MovieTrailer> movieTrailers) {
+        this.movieId = movieId;
+        this.title = title;
+        this.posterImagePath = posterImagePath;
+        this.backdropPath = backdropPath;
+        this.originalTitle = originalTitle;
+        this.overview = overview;
+        this.userRating = userRating;
+        this.releaseDate = releaseDate;
+        this.movieTrailers = movieTrailers;
+    }
+
+    @Ignore
     public Movie(Parcel parcel) {
-        mMovieId = parcel.readInt();
-        mTitle = parcel.readString();
-        mPosterImagePath = parcel.readString();
-        mBackdropPath = parcel.readString();
-        mOriginalTitle = parcel.readString();
-        mOverview = parcel.readString();
-        mUserRating = parcel.readString();
-        mReleaseDate = parcel.readString();
+        movieId = parcel.readInt();
+        title = parcel.readString();
+        posterImagePath = parcel.readString();
+        backdropPath = parcel.readString();
+        originalTitle = parcel.readString();
+        overview = parcel.readString();
+        userRating = parcel.readString();
+        releaseDate = parcel.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -61,38 +99,41 @@ public class Movie implements Parcelable {
 
     //region Getters...
 
+    public int getMovieId() {
+        return movieId;
+    }
+
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public String getPosterImagePath() {
-        return mPosterImagePath;
+        return posterImagePath;
     }
 
     public String getBackdropPath() {
-        return mBackdropPath;
+        return backdropPath;
     }
 
     public String getOriginalTitle() {
-        return mOriginalTitle;
+        return originalTitle;
     }
 
     public String getOverview() {
-        return mOverview;
+        return overview;
     }
 
     public String getUserRating() {
-        return mUserRating;
+        return userRating;
     }
 
     public String getReleaseDate() {
-        return mReleaseDate;
+        return releaseDate;
     }
 
-    public int getMovieId() {
-        return mMovieId;
+    public List<MovieTrailer> getMovieTrailers() {
+        return movieTrailers;
     }
-
     //endregion Getters...
 
     //region Overridden Methods...
@@ -103,14 +144,15 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mMovieId);
-        dest.writeString(mTitle);
-        dest.writeString(mPosterImagePath);
-        dest.writeString(mBackdropPath);
-        dest.writeString(mOriginalTitle);
-        dest.writeString(mOverview);
-        dest.writeString(mUserRating);
-        dest.writeString(mReleaseDate);
+        dest.writeInt(movieId);
+        dest.writeString(title);
+        dest.writeString(posterImagePath);
+        dest.writeString(backdropPath);
+        dest.writeString(originalTitle);
+        dest.writeString(overview);
+
+        dest.writeString(userRating);
+        dest.writeString(releaseDate);
     }
     //endregion
 
