@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 ext {
     supportLibVersion = '27.1.1'
-    constraintLayoutLibVersion = '1.1.0'
+    constraintLayoutLibVersion = '1.1.1'
     junitLibVersion = '4.12'
     picassoLibVersion = '2.5.2'
     roomLibVersion = "1.1.0"
-    lifecycleLibVersion = "1.1.0"
+    lifecycleLibVersion = "1.1.1"
     retrofitLibVersion = "2.3.0"
 }
 
@@ -14,7 +14,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.tamrakar.uguess.popularmovies"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -61,5 +61,6 @@ dependencies {
 }
 
 repositories {
+    google()
     mavenCentral()
 }

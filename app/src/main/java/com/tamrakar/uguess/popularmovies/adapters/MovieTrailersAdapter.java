@@ -1,13 +1,21 @@
 package com.tamrakar.uguess.popularmovies.adapters;
 
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.tamrakar.uguess.popularmovies.R;
+import com.tamrakar.uguess.popularmovies.helpers.UriHelper;
 import com.tamrakar.uguess.popularmovies.models.MovieTrailer;
 
 import java.util.List;
@@ -17,26 +25,53 @@ public class MovieTrailersAdapter extends RecyclerView.Adapter<MovieTrailersAdap
     //region Variables...
     private static final String LOG_TAG = MovieTrailersAdapter.class.getSimpleName();
     private List<MovieTrailer> mMovieTrailers;
+    private Context mContext;
     //endregion
 
     //region Constructors...
-    public MovieTrailersAdapter(List<MovieTrailer> movieTrailers) {
+    public MovieTrailersAdapter(Context context, List<MovieTrailer> movieTrailers) {
         mMovieTrailers = movieTrailers;
+        mContext = context;
     }
     //endregion
 
     //region Overridden Methods...
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_detail_footer_trailer, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.mTextViewTrailerTitle.setText(mMovieTrailers.get(position).getName());
+        final MovieTrailer movieTrailer = mMovieTrailers.get(position);
+        holder.mTextViewTrailerTitle.setText(movieTrailer.getName());
+
+        if (movieTrailer.isYouTubeTrailer()) {
+            try {
+                Picasso.with(mContext)
+                        .load(UriHelper.getYoutTubeThumbnailUriString(movieTrailer.getKey()))
+                        .placeholder(new ColorDrawable(mContext.getResources().getColor(R.color.colorPrimaryUltraDark)))
+                        .into(holder.mImageViewTrailerThumbnail);
+            } catch (Exception e) {
+                Log.e(LOG_TAG, e.getMessage());
+            }
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(UriHelper.getYoutTubeVideoUriString(movieTrailer.getKey())));
+                    mContext.startActivity(intent);
+                } catch (Exception e) {
+                    Log.e(LOG_TAG, e.getMessage());
+                }
+            }
+        });
     }
 
     @Override
@@ -46,19 +81,14 @@ public class MovieTrailersAdapter extends RecyclerView.Adapter<MovieTrailersAdap
     //endregion
 
     //region ViewHolder
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextViewTrailerTitle;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView mTextViewTrailerTitle;
+        ImageView mImageViewTrailerThumbnail;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mTextViewTrailerTitle = view.findViewById(R.id.tv_trailer_title);
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //TODO launch trailer on YouTube
-                }
-            });
+            mImageViewTrailerThumbnail = view.findViewById(R.id.iv_movie_trailer_thumbnail);
         }
     }
     //endregion

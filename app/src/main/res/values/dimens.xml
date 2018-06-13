@@ -28,5 +28,10 @@
     <dimen name="activity_detail_footer_component_margin">8dp</dimen>
     <dimen name="activity_detail_footer_text_view_margin">16dp</dimen>
     <dimen name="movie_trailer_min_width">120dp</dimen>
+    <dimen name="movie_trailer_view_width">160dp</dimen>
+    <dimen name="movie_trailer_view_height">125dp</dimen>
+    <dimen name="movie_trailer_thumbnail_height">90dp</dimen>
+    <dimen name="movie_trailer_play_width">36dp</dimen>
+    <dimen name="movie_trailer_play_height">36dp</dimen>
 
 </resources>

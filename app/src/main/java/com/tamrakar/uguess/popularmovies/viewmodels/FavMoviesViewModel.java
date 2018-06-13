@@ -3,6 +3,7 @@ package com.tamrakar.uguess.popularmovies.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 
 import com.tamrakar.uguess.popularmovies.data.FavMovieRepository;
 import com.tamrakar.uguess.popularmovies.models.Movie;

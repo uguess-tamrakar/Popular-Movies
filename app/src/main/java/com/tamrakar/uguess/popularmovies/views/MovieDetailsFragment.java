@@ -51,8 +51,10 @@ public class MovieDetailsFragment extends Fragment implements
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mMovie = getArguments().getParcelable(CURRENT_MOVIE);
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
+        if (getArguments() != null) {
+            mMovie = getArguments().getParcelable(CURRENT_MOVIE);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
 
         mBinding.rvMovieTrailers.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -63,6 +65,7 @@ public class MovieDetailsFragment extends Fragment implements
         mBinding.tvOverview.setText(mMovie.getOverview());
         mBinding.tvReleasedOn.setText(formatter
                 .format(java.sql.Date.valueOf(mMovie.getReleaseDate())));
+        }
 
         //TODO Set fab button image according to if the movie has already been favored
 
@@ -88,7 +91,7 @@ public class MovieDetailsFragment extends Fragment implements
 
     @Override
     public void onLoadFinished(@NonNull Loader<ArrayList<MovieTrailer>> loader, ArrayList<MovieTrailer> data) {
-        MovieTrailersAdapter movieTrailersAdapter = new MovieTrailersAdapter(data);
+        MovieTrailersAdapter movieTrailersAdapter = new MovieTrailersAdapter(getContext(), data);
         mBinding.rvMovieTrailers.setAdapter(movieTrailersAdapter);
     }
 

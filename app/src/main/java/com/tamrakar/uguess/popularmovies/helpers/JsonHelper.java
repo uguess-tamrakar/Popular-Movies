@@ -32,10 +32,10 @@ public class JsonHelper {
 
                     if (resultJsonObj != null) {
                         String key = resultJsonObj.optString("key");
-                        String id = resultJsonObj.optString("id");
                         String name = resultJsonObj.optString("name");
+                        String site = resultJsonObj.optString("site");
 
-                        movieTrailers.add(new MovieTrailer(key, id, name));
+                        movieTrailers.add(new MovieTrailer(key, name, site));
                     }
                 }
             }

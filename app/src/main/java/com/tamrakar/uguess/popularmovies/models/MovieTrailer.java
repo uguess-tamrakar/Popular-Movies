@@ -3,24 +3,21 @@ package com.tamrakar.uguess.popularmovies.models;
 public class MovieTrailer {
 
     //region Variables..
-    private String name;
-    private String id;
     private String key;
+    private String name;
+    private String site;
     //endregion
 
     //region Constructors...
-    public MovieTrailer(String key, String id, String name) {
+    public MovieTrailer(String key, String name, String site) {
         this.key = key;
-        this.id = id;
         this.name = name;
+        this.site = site;
+
     }
     //endregion
 
     //region Getters...
-    public String getId() {
-        return id;
-    }
-
     public String getKey() {
         return key;
     }
@@ -29,4 +26,8 @@ public class MovieTrailer {
         return name;
     }
     //endregion
+
+    public boolean isYouTubeTrailer() {
+        return site.contains("YouTube");
+    }
 }

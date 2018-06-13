@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="75dp"
+    android:layout_width="@dimen/movie_trailer_view_width"
+    android:layout_height="@dimen/movie_trailer_view_height"
     android:background="@color/colorPrimaryUltraDark"
     android:gravity="center"
     android:layout_marginLeft="5dp"
@@ -10,22 +10,35 @@
     android:orientation="vertical"
     android:minWidth="@dimen/movie_trailer_min_width">
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_gravity="center"
-        android:foregroundGravity="center"
-        app:srcCompat="@drawable/ic_movie_trailer_play_24px" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_trailer_thumbnail_height">
+
+        <ImageView
+            android:id="@+id/iv_movie_trailer_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/cd_movie_trailer_thumbnail"
+            android:foregroundGravity="center" />
+
+        <ImageView
+            android:layout_width="@dimen/movie_trailer_play_width"
+            android:layout_height="@dimen/movie_trailer_play_height"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:foregroundGravity="center"
+            android:contentDescription="@string/cd_movie_trailer_play"
+            app:srcCompat="@drawable/ic_movie_trailer_play_24px" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_trailer_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/colorBorder"
-        android:gravity="center"
-        android:maxLines="3"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:gravity="bottom"
+        android:maxLines="2"
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>

@@ -1,11 +1,9 @@
 package com.tamrakar.uguess.popularmovies.views;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +13,6 @@ import com.tamrakar.uguess.popularmovies.adapters.MainFragmentPagerAdapter;
 import com.tamrakar.uguess.popularmovies.databinding.ActivityMainBinding;
 import com.tamrakar.uguess.popularmovies.models.Movie;
 import com.tamrakar.uguess.popularmovies.viewmodels.FavMoviesViewModel;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 

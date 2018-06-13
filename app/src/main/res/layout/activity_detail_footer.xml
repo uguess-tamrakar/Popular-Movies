@@ -46,6 +46,7 @@
                     android:layout_marginEnd="@dimen/activity_detail_footer_component_margin"
                     android:layout_marginRight="@dimen/activity_detail_footer_component_margin"
                     android:layout_marginTop="@dimen/activity_detail_footer_component_margin"
+                    app:srcCompat="@drawable/ic_favorite_24px"
                     app:backgroundTint="@color/colorPrimaryDark"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

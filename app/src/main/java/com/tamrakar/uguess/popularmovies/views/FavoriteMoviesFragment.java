@@ -50,6 +50,8 @@ public class FavoriteMoviesFragment extends Fragment {
         FavMoviesViewModel viewModel = ViewModelProviders
                 .of(this)
                 .get(FavMoviesViewModel.class);
+        List<Movie> test = viewModel.getFavMovies().getValue();
+
         viewModel.getFavMovies().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(@Nullable List<Movie> favMovies) {

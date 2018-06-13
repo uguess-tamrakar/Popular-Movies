@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -52,26 +53,33 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
         }
 
         FragmentMainGridItemBinding binding = DataBindingUtil.bind(convertView);
-        binding.tvMovieTitle.setText(movie.getTitle());
-        binding.ivMoviePoster.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DetailActivity.class);
-                intent.putExtra(CLICKED_MOVIE, movie);
-                ((Activity) mContext).startActivityForResult(intent,
-                        MainActivity.ADD_FAV_MOVIES_REQUEST_CODE);
-            }
-        });
 
-        try {
-            String moviePosterUri = UriHelper
-                    .getTmdbMoviePosterUriString(movie.getPosterImagePath());
-            Picasso.with(getContext())
-                    .load(moviePosterUri)
-                    .placeholder(R.drawable.ic_movie_info_24px)
-                    .into(binding.ivMoviePoster);
-        } catch (Exception e) {
-            Log.e(LOG_TAG, e.getMessage());
+        if (binding != null) {
+            binding.tvMovieTitle.setText(movie != null ? movie.getTitle() : "Title not found");
+
+            binding.ivMoviePoster.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra(CLICKED_MOVIE, movie);
+                    ((Activity) mContext).startActivityForResult(intent,
+                            MainActivity.ADD_FAV_MOVIES_REQUEST_CODE);
+                }
+            });
+
+            try {
+                if (movie != null) {
+                    String moviePosterUri = UriHelper
+                            .getTmdbMoviePosterUriString(movie.getPosterImagePath());
+
+                    Picasso.with(getContext())
+                            .load(moviePosterUri)
+                            .placeholder(new ColorDrawable(mContext.getResources().getColor(R.color.colorPrimaryUltraDark)))
+                            .into(binding.ivMoviePoster);
+                }
+            } catch (Exception e) {
+                Log.e(LOG_TAG, e.getMessage());
+            }
         }
 
         return convertView;

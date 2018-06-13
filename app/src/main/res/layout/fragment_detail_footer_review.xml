@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
         android:layout_marginRight="@dimen/activity_detail_footer_text_view_margin"
+        android:layout_marginEnd="@dimen/activity_detail_footer_text_view_margin"
+        android:layout_marginStart="@dimen/activity_detail_footer_component_margin"
         android:textColor="@color/colorAccent" />
 
     <TextView
@@ -21,6 +23,8 @@
         android:layout_marginLeft="@dimen/activity_detail_footer_component_margin"
         android:layout_marginRight="@dimen/activity_detail_footer_text_view_margin"
         android:textColor="@color/colorHighlight"
+        android:layout_marginEnd="@dimen/activity_detail_footer_text_view_margin"
+        android:layout_marginStart="@dimen/activity_detail_footer_component_margin"
         android:textAlignment="viewEnd" />
 
     <View
