@@ -53,18 +53,17 @@ public class MovieDetailsFragment extends Fragment implements
 
         if (getArguments() != null) {
             mMovie = getArguments().getParcelable(CURRENT_MOVIE);
-
             SimpleDateFormat formatter = new SimpleDateFormat("MMM d, yyyy", Locale.ENGLISH);
 
-        mBinding.rvMovieTrailers.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mBinding.rvMovieTrailers.setLayoutManager(layoutManager);
+            mBinding.rvMovieTrailers.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            mBinding.rvMovieTrailers.setLayoutManager(layoutManager);
 
-        mBinding.tvOriginalTitle.setText(mMovie.getOriginalTitle());
-        mBinding.tvOverview.setText(mMovie.getOverview());
-        mBinding.tvReleasedOn.setText(formatter
-                .format(java.sql.Date.valueOf(mMovie.getReleaseDate())));
+            mBinding.tvOriginalTitle.setText(mMovie.getOriginalTitle());
+            mBinding.tvOverview.setText(mMovie.getOverview());
+            mBinding.tvReleasedOn.setText(formatter
+                    .format(java.sql.Date.valueOf(mMovie.getReleaseDate())));
         }
 
         //TODO Set fab button image according to if the movie has already been favored

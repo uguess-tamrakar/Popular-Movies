@@ -15,11 +15,13 @@ import java.util.List;
 public class PopularMoviesViewModel extends AndroidViewModel {
 
     private final LiveData<Movies> observableMovies;
+    public Movies popularMovies;
 
     public PopularMoviesViewModel(@NonNull Application application) {
         super(application);
         String apiKey = BuildConfig.THE_MOVIE_DB_API;
         observableMovies = BrowseMovieRepository.getInstance().getPopularMovies(apiKey);
+        popularMovies = observableMovies.getValue();
     }
 
     public LiveData<Movies> getObservableMovies() {

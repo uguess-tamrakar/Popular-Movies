@@ -11,23 +11,38 @@ import java.util.List;
 
 public class FavMovieRepository {
 
+    //region Variables...
     private FavMovieDao mFavMovieDao;
     private LiveData<List<Movie>> mFavMovies;
+    private LiveData<List<Integer>> mFavMovieIds;
+    //endregion
 
+    //region Constructors...
     public FavMovieRepository(Application application) {
         PopularMoviesDatabase db = PopularMoviesDatabase.getInstance(application);
         mFavMovieDao = db.favMovieDao();
         mFavMovies = mFavMovieDao.loadAllFavMovies();
+        mFavMovieIds = mFavMovieDao.getFavMovieIds();
     }
+    //endregion
 
+    //region Getters...
     public LiveData<List<Movie>> getFavMovies() {
         return mFavMovies;
     }
 
+    public LiveData<List<Integer>> getFavMovieIds() {
+        return mFavMovieIds;
+    }
+    //endregion
+
+    //region Methods...
     public void insert(Movie favMovie) {
         new insertAsyncTask(mFavMovieDao).execute(favMovie);
     }
+    //endregion
 
+    //region insertAsyncTask
     private static class insertAsyncTask extends AsyncTask<Movie, Void, Void>{
 
         private FavMovieDao mAsyncTaskDao;
@@ -42,4 +57,5 @@ public class FavMovieRepository {
             return null;
         }
     }
+    //endregion
 }
