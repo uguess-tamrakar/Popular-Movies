@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,11 +26,13 @@ public class BrowseMoviesFragment extends Fragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     //region Variables...
+    private static final String GRID_VIEW_STATE = "grid_view_state";
     private static final String KEY_PREF_SORT_ORDER = "sort_order";
     private int mSortOrder = 0;
     private Context mContext;
     private SharedPreferences mSharedPreferences;
     private FragmentMainGridBinding mBinding;
+    private Parcelable mGridViewState;
     //endregion
 
     //region Constructors...
@@ -41,7 +44,12 @@ public class BrowseMoviesFragment extends Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setUpViewModelBasedOnSortOrder();
+
+        if (savedInstanceState != null) {
+            mGridViewState = savedInstanceState.getParcelable(GRID_VIEW_STATE);
+        }
+
+        setUpViewModelBasedOnSortOrder(mGridViewState);
     }
 
     @Nullable
@@ -63,7 +71,23 @@ public class BrowseMoviesFragment extends Fragment
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        switch (key) {
+            case KEY_PREF_SORT_ORDER:
+                mSortOrder = Integer.valueOf(sharedPreferences.getString(key, ""));
+                setUpViewModelBasedOnSortOrder(null);
+        }
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mGridViewState = mBinding.gvMain.onSaveInstanceState();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelable(GRID_VIEW_STATE, mBinding.gvMain.onSaveInstanceState());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -74,7 +98,7 @@ public class BrowseMoviesFragment extends Fragment
     //endregion
 
     //region Helper Methods...
-    private void setUpViewModelBasedOnSortOrder() {
+    private void setUpViewModelBasedOnSortOrder(final Parcelable gridViewState) {
         if (mSortOrder == 0) {
             final PopularMoviesViewModel viewModel = ViewModelProviders
                     .of(this)
@@ -86,6 +110,10 @@ public class BrowseMoviesFragment extends Fragment
                     if (movies != null) {
                         MoviesAdapter moviesAdapter = new MoviesAdapter(mContext, movies.getMovies());
                         mBinding.gvMain.setAdapter(moviesAdapter);
+
+                        if (gridViewState != null) {
+                            mBinding.gvMain.onRestoreInstanceState(gridViewState);
+                        }
                     }
                 }
             });
@@ -101,6 +129,10 @@ public class BrowseMoviesFragment extends Fragment
                     if (movies != null) {
                         MoviesAdapter moviesAdapter = new MoviesAdapter(mContext, movies.getMovies());
                         mBinding.gvMain.setAdapter(moviesAdapter);
+
+                        if (gridViewState != null) {
+                            mBinding.gvMain.onRestoreInstanceState(gridViewState);
+                        }
                     }
                 }
             });
