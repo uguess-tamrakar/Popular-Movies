@@ -67,6 +67,8 @@ public class MovieDetailsFragment extends Fragment implements
         }
 
         //TODO Set fab button image according to if the movie has already been favored
+        // Wanting to setup image on the fab button to different images based on if its already
+        // in the user favorites list but couldn't figure out how to check that.
 
         getLoaderManager().initLoader(MovieTrailersLoader.MOVIE_TRAILERS_LOADER_ID, null, this);
     }

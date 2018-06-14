@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        //TODO: Check to see if the movie has already been added to favorite
+        // If it is already in favorites then show a toast to say that otherwise continue below
+
         if (requestCode == ADD_FAV_MOVIES_REQUEST_CODE && resultCode == RESULT_OK) {
             Movie favMovie = data.getParcelableExtra(DetailActivity.ADD_FAV_MOVIE);
             mFavMoviesViewModel.insert(favMovie);
