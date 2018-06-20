@@ -73,7 +73,6 @@ public class MovieReviewsLoader extends AsyncTaskLoader<ArrayList<MovieReview>> 
         if (isStarted()) {
             super.deliverResult(movieReviews);
         } else if (isReset()) {
-            return;
         }
     }
 

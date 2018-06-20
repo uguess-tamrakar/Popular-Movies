@@ -16,9 +16,7 @@ import com.tamrakar.uguess.popularmovies.R;
 import com.tamrakar.uguess.popularmovies.adapters.MoviesAdapter;
 import com.tamrakar.uguess.popularmovies.databinding.FragmentMainGridBinding;
 import com.tamrakar.uguess.popularmovies.models.Movie;
-import com.tamrakar.uguess.popularmovies.models.Movies;
 import com.tamrakar.uguess.popularmovies.viewmodels.FavMoviesViewModel;
-import com.tamrakar.uguess.popularmovies.viewmodels.PopularMoviesViewModel;
 
 import java.util.List;
 
@@ -35,11 +33,6 @@ public class FavoriteMoviesFragment extends Fragment {
     //endregion
 
     //region Overridden Methods...
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -56,7 +49,6 @@ public class FavoriteMoviesFragment extends Fragment {
         final FavMoviesViewModel viewModel = ViewModelProviders
                 .of(this)
                 .get(FavMoviesViewModel.class);
-        List<Integer> favMovieIds = viewModel.getmFavMovieIds().getValue();
 
         viewModel.getFavMovies().observe(this, new Observer<List<Movie>>() {
             @Override

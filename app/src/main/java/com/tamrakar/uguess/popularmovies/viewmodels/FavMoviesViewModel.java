@@ -3,7 +3,6 @@ package com.tamrakar.uguess.popularmovies.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 
 import com.tamrakar.uguess.popularmovies.data.FavMovieRepository;
 import com.tamrakar.uguess.popularmovies.models.Movie;
@@ -15,7 +14,6 @@ public class FavMoviesViewModel extends AndroidViewModel {
     //region Variables...
     private FavMovieRepository mRepository;
     private LiveData<List<Movie>> mFavMovies;
-    private LiveData<List<Integer>> mFavMovieIds;
     //endregion
 
     //region Constructors...
@@ -23,7 +21,6 @@ public class FavMoviesViewModel extends AndroidViewModel {
         super(application);
         mRepository = new FavMovieRepository(application);
         mFavMovies = mRepository.getFavMovies();
-        mFavMovieIds = mRepository.getFavMovieIds();
     }
     //endregion
 
@@ -32,12 +29,19 @@ public class FavMoviesViewModel extends AndroidViewModel {
         return mFavMovies;
     }
 
-    public LiveData<List<Integer>> getmFavMovieIds() {
-        return mFavMovieIds;
-    }
+
     //endregion
 
     //region Methods...
+
+    public void delete(Movie favMovie) {
+        mRepository.delete(favMovie);
+    }
+
+    public boolean doesContainFavMovie(int movieId) {
+        return mRepository.containsFavMovie(movieId);
+    }
+
     public void insert(Movie favMovie) {
         mRepository.insert(favMovie);
     }

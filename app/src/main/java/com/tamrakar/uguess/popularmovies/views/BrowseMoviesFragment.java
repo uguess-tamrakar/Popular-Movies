@@ -32,7 +32,8 @@ public class BrowseMoviesFragment extends Fragment
     private Context mContext;
     private SharedPreferences mSharedPreferences;
     private FragmentMainGridBinding mBinding;
-    private Parcelable mGridViewState;
+    private static Parcelable sGridViewState;
+    private static boolean sRefreshGridView;
     //endregion
 
     //region Constructors...
@@ -41,15 +42,33 @@ public class BrowseMoviesFragment extends Fragment
     //endregion
 
     //region Overridden Methods...
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mContext = getActivity();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        PreferenceManager.setDefaultValues(mContext, R.xml.preferences_main, false);
+        mSortOrder = Integer.valueOf(mSharedPreferences.getString(KEY_PREF_SORT_ORDER, ""));
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            mGridViewState = savedInstanceState.getParcelable(GRID_VIEW_STATE);
+        if (sRefreshGridView) {
+            sGridViewState = null;
+            sRefreshGridView = false;
+        } else {
+            if (savedInstanceState != null) {
+                sGridViewState = savedInstanceState.getParcelable(GRID_VIEW_STATE);
+            }
         }
 
-        setUpViewModelBasedOnSortOrder(mGridViewState);
+        setUpViewModelBasedOnSortOrder(sGridViewState);
     }
 
     @Nullable
@@ -57,14 +76,8 @@ public class BrowseMoviesFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mContext = getActivity();
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_grid,
                         container, false);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
-        PreferenceManager.setDefaultValues(mContext, R.xml.preferences_main, false);
-        mSortOrder = Integer.valueOf(mSharedPreferences.getString(KEY_PREF_SORT_ORDER, ""));
 
         return mBinding.getRoot();
     }
@@ -74,20 +87,26 @@ public class BrowseMoviesFragment extends Fragment
         switch (key) {
             case KEY_PREF_SORT_ORDER:
                 mSortOrder = Integer.valueOf(sharedPreferences.getString(key, ""));
-                setUpViewModelBasedOnSortOrder(null);
+                sRefreshGridView = true;
         }
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        mGridViewState = mBinding.gvMain.onSaveInstanceState();
+    public void onResume() {
+        super.onResume();
+
+        if (sRefreshGridView) {
+            sGridViewState = null;
+            sRefreshGridView = false;
+            setUpViewModelBasedOnSortOrder(sGridViewState);
+        }
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelable(GRID_VIEW_STATE, mBinding.gvMain.onSaveInstanceState());
         super.onSaveInstanceState(outState);
+        sGridViewState = mBinding.gvMain.onSaveInstanceState();
+        outState.putParcelable(GRID_VIEW_STATE, sGridViewState);
     }
 
     @Override

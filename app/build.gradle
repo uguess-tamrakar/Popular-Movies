@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 ext {
     supportLibVersion = '27.1.1'
-    constraintLayoutLibVersion = '1.1.1'
+    constraintLayoutLibVersion = '1.1.2'
     junitLibVersion = '4.12'
     picassoLibVersion = '2.5.2'
-    roomLibVersion = "1.1.0"
+    roomLibVersion = "1.1.1"
     lifecycleLibVersion = "1.1.1"
     retrofitLibVersion = "2.3.0"
 }

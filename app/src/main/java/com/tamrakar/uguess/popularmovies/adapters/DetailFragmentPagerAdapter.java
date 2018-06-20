@@ -39,10 +39,6 @@ public class DetailFragmentPagerAdapter extends FragmentPagerAdapter {
                 break;
         }
 
-        //TODO: In activity_detail_footer, make viewpager takes the remaining height with scroll
-        //The viewpager do not show if I set the layout_height to wrap_content or match_parent.
-        //I have to hard code it for some reason. Also tried setting layout_weight but didn't help.
-
         return resultFragment;
     }
 

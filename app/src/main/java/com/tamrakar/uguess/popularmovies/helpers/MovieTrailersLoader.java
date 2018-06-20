@@ -5,7 +5,6 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.tamrakar.uguess.popularmovies.BuildConfig;
-import com.tamrakar.uguess.popularmovies.models.Movie;
 import com.tamrakar.uguess.popularmovies.models.MovieTrailer;
 
 import java.io.BufferedReader;
@@ -78,7 +77,6 @@ public class MovieTrailersLoader extends AsyncTaskLoader<ArrayList<MovieTrailer>
         if (isStarted()) {
             super.deliverResult(movieTrailers);
         } else if (isReset()) {
-            return;
         }
     }
 

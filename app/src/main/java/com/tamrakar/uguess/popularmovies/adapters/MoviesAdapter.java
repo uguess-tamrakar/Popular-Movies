@@ -1,12 +1,14 @@
 package com.tamrakar.uguess.popularmovies.adapters;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.tamrakar.uguess.popularmovies.R;
 import com.tamrakar.uguess.popularmovies.databinding.FragmentMainGridItemBinding;
 import com.tamrakar.uguess.popularmovies.helpers.UriHelper;
 import com.tamrakar.uguess.popularmovies.models.Movie;
+import com.tamrakar.uguess.popularmovies.viewmodels.FavMoviesViewModel;
 import com.tamrakar.uguess.popularmovies.views.DetailActivity;
 import com.tamrakar.uguess.popularmovies.views.MainActivity;
 
@@ -62,8 +65,21 @@ public class MoviesAdapter extends ArrayAdapter<Movie> {
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), DetailActivity.class);
                     intent.putExtra(CLICKED_MOVIE, movie);
-                    ((Activity) mContext).startActivityForResult(intent,
-                            MainActivity.ADD_FAV_MOVIES_REQUEST_CODE);
+
+                    FavMoviesViewModel viewModel = ViewModelProviders
+                            .of((FragmentActivity) mContext)
+                            .get(FavMoviesViewModel.class);
+                    boolean isFavoriteMovie = viewModel.doesContainFavMovie(movie.getMovieId());
+
+                    int requestCode;
+
+                    if (isFavoriteMovie) {
+                        requestCode = MainActivity.REMOVE_FAV_MOVIES_REQUEST_CODE;
+                    } else {
+                        requestCode = MainActivity.ADD_FAV_MOVIES_REQUEST_CODE;
+                    }
+
+                    ((Activity) mContext).startActivityForResult(intent, requestCode);
                 }
             });
 

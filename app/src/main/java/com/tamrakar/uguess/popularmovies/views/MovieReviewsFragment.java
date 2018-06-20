@@ -2,8 +2,6 @@ package com.tamrakar.uguess.popularmovies.views;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -57,21 +55,20 @@ public class MovieReviewsFragment extends Fragment implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mMovie = getArguments().getParcelable(CURRENT_MOVIE);
+        if (getArguments() != null) {
+            mMovie = getArguments().getParcelable(CURRENT_MOVIE);
+        }
 
         mBinding.rvMovieReviews.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mBinding.rvMovieReviews.setLayoutManager(layoutManager);
 
-        //TODO: Remove the mysterious control when scrolling RecyclerView upwards
-        //While scrolling the Movie Reviews RecyclerView up, I see a control at the bottom
-        //Couldn't find a solution on how to make this now show up.
-
         getLoaderManager().initLoader(MovieReviewsLoader.MOVIE_REVIEWS_LOADER_ID,
                 null, this);
     }
 
+    @NonNull
     @Override
     public Loader<ArrayList<MovieReview>> onCreateLoader(int id, @Nullable Bundle args) {
         return new MovieReviewsLoader(getContext(), String.valueOf(mMovie.getMovieId()));

@@ -7,38 +7,12 @@ public class UriHelper {
     private static final String TMDB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
     private static final String YOUTUBE_THUMBNAIL_URL = "https://img.youtube.com/vi/%s/mqdefault.jpg";
     private static final String YOUTUBE_VIDEO_URL = "http://www.youtube.com/watch?v=%s";
-    //private static final String POPULAR_ENDPOINT = "/movie/popular";
-    //private static final String TOP_RATED_ENDPOINT = "/movie/top_rated";
     private static final String VIDEOS_ENDPOINT = "/movie/%s/videos";
     private static final String REVIEWS_ENDPOINT = "/movie/%s/reviews";
     private static final String API_KEY_PARAM = "?api_key";
     //endregion
 
     //region Static Methods...
-//    public static String getPopularMoviesUriString(String apiKey) throws Exception {
-//        if (!apiKey.isEmpty()) {
-//            StringBuilder result = new StringBuilder();
-//            result.append(MOVIE_DB_BASE_URL)
-//                    .append(POPULAR_ENDPOINT)
-//                    .append(API_KEY_PARAM).append("=" + apiKey);
-//            return result.toString();
-//        } else {
-//            throw new Exception("Api key is required.");
-//        }
-//    }
-//
-//    public static String getTopRatedMoviesUriString(String apiKey) throws Exception {
-//        if (!apiKey.isEmpty()) {
-//            StringBuilder result = new StringBuilder();
-//            result.append(MOVIE_DB_BASE_URL)
-//                    .append(TOP_RATED_ENDPOINT)
-//                    .append(API_KEY_PARAM)
-//                    .append("=" + apiKey);
-//            return result.toString();
-//        } else {
-//            throw new Exception("Api key is required.");
-//        }
-//    }
 
     public static String getMovieTrailersUriString(String apiKey, String movieId) throws Exception {
         if (!movieId.isEmpty() && !apiKey.isEmpty()) {

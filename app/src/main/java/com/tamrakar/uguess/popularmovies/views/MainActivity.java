@@ -18,7 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     //region Variables...
     public static final int ADD_FAV_MOVIES_REQUEST_CODE = 1;
+    public static final int REMOVE_FAV_MOVIES_REQUEST_CODE = 2;
     private FavMoviesViewModel mFavMoviesViewModel;
+    private ActivityMainBinding mBinding;
     //endregion
 
     //region Overridden Methods...
@@ -27,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mFavMoviesViewModel = ViewModelProviders.of(this).get(FavMoviesViewModel.class);
 
-        ActivityMainBinding mainBinding = DataBindingUtil
+        mBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_main);
 
-        setSupportActionBar(mainBinding.toolbar);
+        setSupportActionBar(mBinding.toolbar);
 
         MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(this,
                 getSupportFragmentManager());
-        mainBinding.viewPagerMain.setAdapter(adapter);
-        mainBinding.tabLayoutMain.setupWithViewPager(mainBinding.viewPagerMain);
+        mBinding.viewPagerMain.setAdapter(adapter);
+        mBinding.tabLayoutMain.setupWithViewPager(mBinding.viewPagerMain);
     }
 
     @Override
@@ -58,16 +60,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        //TODO: Check to see if the movie has already been added to favorite
-        // If it is already in favorites then show a toast to say that otherwise continue below
+        Movie favMovie;
 
         if (requestCode == ADD_FAV_MOVIES_REQUEST_CODE && resultCode == RESULT_OK) {
-            Movie favMovie = data.getParcelableExtra(DetailActivity.ADD_FAV_MOVIE);
+            favMovie = data.getParcelableExtra(DetailActivity.ADD_FAV_MOVIE);
             mFavMoviesViewModel.insert(favMovie);
+        } else if (requestCode == REMOVE_FAV_MOVIES_REQUEST_CODE && resultCode == RESULT_OK) {
+            favMovie = data.getParcelableExtra(DetailActivity.DELETE_FAV_MOVIE);
+            mFavMoviesViewModel.delete(favMovie);
         }
-    }
 
+        // Select favorites tab onActivityResult
+        mBinding.tabLayoutMain.getTabAt(1).select();
+    }
     //endregion
 
 }

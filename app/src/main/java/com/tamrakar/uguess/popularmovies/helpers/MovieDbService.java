@@ -1,12 +1,9 @@
 package com.tamrakar.uguess.popularmovies.helpers;
 
-import com.tamrakar.uguess.popularmovies.models.Movie;
 import com.tamrakar.uguess.popularmovies.models.Movies;
 
-import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface MovieDbService {

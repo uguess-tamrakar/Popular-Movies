@@ -7,10 +7,7 @@ import android.support.annotation.NonNull;
 
 import com.tamrakar.uguess.popularmovies.BuildConfig;
 import com.tamrakar.uguess.popularmovies.data.BrowseMovieRepository;
-import com.tamrakar.uguess.popularmovies.models.Movie;
 import com.tamrakar.uguess.popularmovies.models.Movies;
-
-import java.util.List;
 
 public class TopRatedMoviesViewModel extends AndroidViewModel {
     private final LiveData<Movies> observableMovies;

@@ -2,7 +2,6 @@ package com.tamrakar.uguess.popularmovies.helpers;
 
 import android.util.Log;
 
-import com.tamrakar.uguess.popularmovies.models.Movie;
 import com.tamrakar.uguess.popularmovies.models.MovieReview;
 import com.tamrakar.uguess.popularmovies.models.MovieTrailer;
 
@@ -10,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.Key;
 import java.util.ArrayList;
 
 public class JsonHelper {

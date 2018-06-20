@@ -7,8 +7,6 @@ import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.List;
-
 @Entity(tableName = "fav_movies")
 public class Movie implements Parcelable {
 
@@ -36,9 +34,6 @@ public class Movie implements Parcelable {
 
     @ColumnInfo(name = "releasedDate")
     public String releaseDate;
-
-    @Ignore
-    public List<MovieTrailer> movieTrailers;
     //endregion
 
     //region Constructors...
@@ -56,19 +51,6 @@ public class Movie implements Parcelable {
         this.overview = overview;
         this.userRating = userRating;
         this.releaseDate = releaseDate;
-    }
-
-    @Ignore
-    public Movie(int movieId, String title, String posterImagePath, String backdropPath, String originalTitle, String overview, String userRating, String releaseDate, List<MovieTrailer> movieTrailers) {
-        this.movieId = movieId;
-        this.title = title;
-        this.posterImagePath = posterImagePath;
-        this.backdropPath = backdropPath;
-        this.originalTitle = originalTitle;
-        this.overview = overview;
-        this.userRating = userRating;
-        this.releaseDate = releaseDate;
-        this.movieTrailers = movieTrailers;
     }
 
     @Ignore
@@ -131,9 +113,6 @@ public class Movie implements Parcelable {
         return releaseDate;
     }
 
-    public List<MovieTrailer> getMovieTrailers() {
-        return movieTrailers;
-    }
     //endregion Getters...
 
     //region Overridden Methods...

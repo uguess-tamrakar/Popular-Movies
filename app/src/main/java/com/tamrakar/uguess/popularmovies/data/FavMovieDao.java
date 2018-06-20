@@ -20,8 +20,8 @@ public interface FavMovieDao {
     @Query("SELECT * FROM fav_movies ORDER BY movieId")
     LiveData<List<Movie>> loadAllFavMovies();
 
-    @Query("SELECT movieId FROM fav_movies")
-    LiveData<List<Integer>> getFavMovieIds();
+    @Query("SELECT movieId FROM fav_movies WHERE movieId = :movieId")
+    int getFavMovieByMovieId(int movieId);
 
     @Delete
     void deleteFavMovie(Movie favMovie);
